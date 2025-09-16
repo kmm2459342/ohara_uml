@@ -1,0 +1,8 @@
+Ctrl + B         ← 左のバーの開閉
+Ctrl + W         ← ファイルを閉じる
+Ctrl + Shift + L ← 同じものを全て選択
+Ctrl + D         ← 一つずつ選択
+Shift + Alt + ↓  ← 下にコピペ
+Ctrl + Shift + Z ← 前に進む
+Ctrl + X         ← 切り取り
+Ctrl + /         ← コメントアウト
