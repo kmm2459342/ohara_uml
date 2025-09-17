@@ -1,0 +1,20 @@
+@startuml Web訪問者ユースケース図
+left to right direction
+actor 訪問者 as V
+
+rectangle Web訪問者システム {
+  usecase "新規登録する" as UC1
+  usecase "ログインする" as UC2
+  usecase "ログアウトする" as UC3
+  usecase "自分と他の人の情報を参照する" as UC4
+  usecase "自分の情報を変更する" as UC5
+  usecase "自分の情報を削除する" as UC6
+}
+V --> UC1
+V --> UC2
+V --> UC3
+V --> UC4
+V --> UC5
+V --> UC6
+
+@enduml
