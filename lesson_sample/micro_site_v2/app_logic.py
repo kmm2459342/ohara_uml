@@ -44,7 +44,7 @@ def get_my_greeting() -> str:
             return data.get("good_night")
     except (json.JSONDecodeError, OSError):
         return ""
-1
+
 def set_first_value(first_value) -> None:
     """1つ目の値をJSONに保存"""
     with open(ROBODOG_FILE, "r", encoding="utf-8") as f:

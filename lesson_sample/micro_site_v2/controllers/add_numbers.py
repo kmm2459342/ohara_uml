@@ -8,5 +8,5 @@ def add_numbers(environ):
     set_second_value(20)
     # get_addition()
 
-    # additionの結果を渡す1
+    # additionの結果を渡す
     return render_template("boundaries/add_numbers_data.html")
