@@ -1,0 +1,19 @@
+@startuml ユースケース図_共通システム_注文詳細
+left to right direction
+
+actor ユーザー as User
+actor 管理者 as Admin
+
+rectangle 共通システム_注文詳細 {
+    usecase "注文詳細を参照する" as UC1
+    usecase "注文詳細を登録する" as UC2
+    usecase "注文詳細を更新する" as UC3
+}
+
+User --> UC1
+
+Admin --> UC1
+Admin --> UC2
+Admin --> UC3
+
+@enduml

@@ -1,0 +1,22 @@
+@startuml ユースケース図_共通システム_返品
+left to right direction
+
+actor ユーザー as User
+actor 管理者 as Admin
+
+rectangle 共通システム_返品 {
+    usecase "返品を申請する" as UC1
+    usecase "返品状況を更新する" as UC2
+    usecase "返品理由を登録する" as UC3
+    usecase "返品を承認する" as UC4
+    usecase "返品を却下する" as UC5
+}
+
+User --> UC1
+User --> UC3
+
+Admin --> UC2
+Admin --> UC4
+Admin --> UC5
+
+@enduml

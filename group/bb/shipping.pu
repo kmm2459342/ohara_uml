@@ -1,0 +1,36 @@
+@startuml
+skinparam boundaryBackgroundColor #D5E8D4
+skinparam controlBackgroundColor  #F8CECC
+skinparam entityBackgroundColor   #DAE8FC
+
+actor ユーザー
+actor 管理者
+
+boundary "shipping.jsp" as 発送管理画面
+control 発送処理
+
+entity "stock.java" as 在庫DB
+entity "order.java" as 注文DB
+
+管理者 -> 発送管理画面 : 発送依頼確認
+activate 管理者
+activate 発送管理画面
+発送管理画面 -> 発送処理 : 発送依頼
+activate 発送処理
+発送処理 -> 注文DB : 注文情報取得
+activate 注文DB
+deactivate 注文DB
+発送処理 -> 在庫DB : 出庫処理
+activate 在庫DB
+在庫DB -> 発送処理 : 在庫更新結果
+deactivate 在庫DB
+発送処理 -> 発送管理画面 : 発送処理結果
+発送管理画面 -> 管理者 : 発送完了表示
+deactivate 管理者
+deactivate 発送管理画面
+発送処理 -> ユーザー : 発送通知（メール／画面）
+activate ユーザー
+deactivate ユーザー
+deactivate 発送処理
+
+@enduml

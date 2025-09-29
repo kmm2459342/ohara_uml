@@ -1,0 +1,61 @@
+@startuml
+
+skinparam boundaryBackgroundColor #D5E8D4
+skinparam controlBackgroundColor  #F8CECC
+skinparam entityBackgroundColor   #DAE8FC
+
+actor ユーザー
+actor 管理者
+
+boundary "return.jsp" as 返品画面
+boundary "cancel.jsp" as キャンセル画面
+
+control 返品処理
+control キャンセル処理
+
+entity "stock.java" as 在庫DB
+entity "order.java" as 注文DB
+
+== ユーザーによる返品処理 ==
+ユーザー -> 返品画面 : 返品依頼
+activate ユーザー
+activate 返品画面
+返品画面 -> 返品処理 : 返品処理依頼
+activate 返品処理
+返品処理 -> 注文DB : 注文情報照合
+activate 注文DB
+deactivate 注文DB
+返品処理 -> 在庫DB : 在庫を戻す
+activate 在庫DB
+在庫DB -> 返品処理 : 更新結果
+deactivate 在庫DB
+返品処理 -> 返品画面 : 返品処理結果
+返品画面 -> ユーザー : 返品完了表示
+deactivate ユーザー
+deactivate 返品画面
+返品処理 -> 管理者 : 返品通知
+activate 管理者
+deactivate 管理者
+deactivate 返品処理
+
+== ユーザーによる注文キャンセル ==
+ユーザー -> キャンセル画面 : 注文キャンセル依頼
+activate ユーザー
+activate キャンセル画面
+キャンセル画面 -> キャンセル処理 : キャンセル依頼
+activate キャンセル処理
+キャンセル処理 -> 注文DB : 注文状態更新（キャンセル）
+activate 注文DB
+deactivate 注文DB
+キャンセル処理 -> 在庫DB : 在庫を戻す
+activate 在庫DB
+在庫DB -> キャンセル処理 : 更新結果
+deactivate 在庫DB
+キャンセル処理 -> キャンセル画面 : キャンセル結果
+キャンセル画面 -> ユーザー : キャンセル完了表示
+deactivate キャンセル画面
+deactivate ユーザー
+キャンセル処理 -> 管理者 : キャンセル通知
+deactivate キャンセル処理
+
+@enduml

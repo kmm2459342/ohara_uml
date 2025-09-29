@@ -1,0 +1,27 @@
+@startuml
+
+skinparam boundaryBackgroundColor #D5E8D4
+skinparam controlBackgroundColor  #F8CECC
+skinparam entityBackgroundColor   #DAE8FC
+
+actor ユーザー
+boundary "login.jsp" as 注文システム
+control ログイン処理
+entity "UserData_java" as 利用者DB
+
+ユーザー -> 注文システム : ログイン要求画面
+activate ユーザー
+activate 注文システム
+注文システム -> ログイン処理 : 認証
+activate ログイン処理
+ログイン処理->利用者DB:利用者DBと照合
+activate 利用者DB
+利用者DB->ログイン処理:照合結果を返す
+deactivate 利用者DB
+ログイン処理 -> 注文システム : 結果を表示
+deactivate ログイン処理
+注文システム -> ユーザー : ログイン結果画面
+deactivate 注文システム
+deactivate ユーザー
+
+@enduml

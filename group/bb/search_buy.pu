@@ -1,0 +1,50 @@
+@startuml
+
+skinparam boundaryBackgroundColor #D5E8D4
+skinparam controlBackgroundColor  #F8CECC
+skinparam entityBackgroundColor   #DAE8FC
+
+actor ユーザー
+boundary "order.jsp" as 注文システム
+control 商品検索
+control カート機能
+control 購入処理
+control 発送処理
+entity "stock.java" as 在庫DB
+entity "Productdata.java" as 販売商品DB
+entity "order.java" as 注文DB
+
+
+ユーザー -> 商品検索 : 商品検索要求
+activate ユーザー
+activate 商品検索
+商品検索 -> 販売商品DB : 商品情報取得
+activate 販売商品DB
+販売商品DB -> 商品検索 : 検索結果
+deactivate 販売商品DB
+商品検索 -> ユーザー : 商品一覧表示
+deactivate 商品検索
+ユーザー -> カート機能 : 商品をカートに追加
+activate カート機能
+カート機能 -> 在庫DB : 在庫確認
+activate 在庫DB
+在庫DB -> カート機能 : 在庫情報
+deactivate 在庫DB
+カート機能 -> ユーザー : カート更新結果
+deactivate カート機能
+ユーザー -> 購入処理 : 購入確定
+activate 購入処理
+購入処理 -> 在庫DB : 在庫更新
+activate 在庫DB
+deactivate 在庫DB
+購入処理 -> 注文DB : 注文情報登録
+activate 注文DB
+注文DB -> 購入処理 : 登録完了
+deactivate 注文DB
+購入処理 -> ユーザー : 購入完了通知
+deactivate ユーザー
+deactivate 購入処理
+
+
+
+@enduml
